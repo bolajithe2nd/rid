@@ -1,2 +1,2 @@
-# rid
+# RID
 RID Crypto Payment Gateway
