@@ -1,10 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
-import { Button } from "../components/ui/button";
-
-export const Route = createFileRoute("/not-found")({
-  component: NotFound,
-});
+import { Button } from "./ui/button";
 
 function NotFound() {
   return (
@@ -30,3 +25,5 @@ function NotFound() {
     </div>
   );
 }
+
+export default NotFound;
