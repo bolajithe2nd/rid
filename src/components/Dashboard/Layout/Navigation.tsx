@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 import {
   Accordion,
   AccordionContent,
@@ -74,26 +74,26 @@ const Navigation = () => {
                 {/* Sublinks */}
                 <AccordionContent>
                   {link.sublinks.map((sublink) => (
-                    <NavLink
+                    <Link
                       key={sublink.name}
                       to={`${sublink.path}`}
-                      className="flex items-center gap-x-4 py-2 px-4 text-slate-900 hover:text-blue-600 rid-navlink"
+                      className="flex items-center gap-x-4 py-2 px-4 text-slate-900 hover:text-blue-600 rid-link"
                     >
                       {sublink.icon}
                       <span>{sublink.name}</span>
-                    </NavLink>
+                    </Link>
                   ))}
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
           ) : (
-            <NavLink
+            <Link
               to={`${link.path}`}
               className="flex items-center gap-x-2 py-2 px-3 text-slate-900 hover:text-blue-600"
             >
               {link.icon}
               <span>{link.name}</span>
-            </NavLink>
+            </Link>
           )}
         </li>
       ))}

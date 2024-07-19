@@ -1,6 +1,6 @@
 import { ChevronRight, Search } from "lucide-react";
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "@tanstack/react-router";
 
 const Breadcrumb = () => {
   const location = useLocation();

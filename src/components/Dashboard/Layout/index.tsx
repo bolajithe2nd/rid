@@ -1,10 +1,9 @@
-import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Breadcrumb from "./Breadcrumb";
 import { useEffect, useState } from "react";
 
-const DashboardLayout = () => {
+const DashboardLayout = ({ children }: { children: JSX.Element }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const toggleSidebar = () => setShowSidebar((prevState) => !prevState);
 
@@ -27,7 +26,8 @@ const DashboardLayout = () => {
           <div className="grid gap-y-6">
             {/* Breadcrumb */}
             <Breadcrumb />
-            <Outlet />
+            {children}
+            {/* <Outlet /> */}
           </div>
         </div>
       </main>

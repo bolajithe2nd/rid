@@ -1,7 +1,7 @@
 import React from "react";
 import { LogOut } from "lucide-react";
 import Navigation from "./Navigation";
-import { Link } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 
 interface SidebarProps {
   showSidebar: boolean;

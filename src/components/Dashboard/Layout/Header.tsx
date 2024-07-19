@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Link } from "@tanstack/react-router";
 import { Menu, User } from "lucide-react";
 
 interface HeaderProps {
@@ -18,7 +18,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
 
         <div className="flex items-center gap-x-4">
           {/* Avatar */}
-          <Link to="profile">
+          <Link to="/dashboard">
             <Avatar className="h-[35px] w-[35px]">
               {/* <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" /> */}
               <AvatarFallback className="grid place-items-center w-[35px] h-[35px] rounded-full bg-muted">

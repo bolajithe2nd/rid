@@ -9,6 +9,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Badge } from "@/components/ui/badge";
 import { FileDown, Filter } from "lucide-react";
 import { transactions } from "@/lib/constants";
@@ -29,16 +34,23 @@ const TransactionTable = () => {
 
           {/* Filter & Export */}
           <div className="flex items-center gap-x-1 justify-end">
-            <Button
-              variant="outline"
-              className="rounded-lg cursor-pointer py-1 px-3"
-              asChild
-            >
-              <span>
-                <Filter className="w-4 h-4 mr-1" />
-                <span className="text-xs">Filter</span>
-              </span>
-            </Button>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="rounded-lg cursor-pointer py-1 px-3"
+                  asChild
+                >
+                  <span>
+                    <Filter className="w-4 h-4 mr-1" />
+                    <span className="text-xs">Filter</span>
+                  </span>
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent>
+                Place content for the popover here.
+              </PopoverContent>
+            </Popover>
             <Button
               variant="outline"
               className="rounded-lg cursor-pointer py-1 px-3"

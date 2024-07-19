@@ -1,7 +1,12 @@
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { createFileRoute } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
+import { Button } from "../components/ui/button";
 
-const NotFound = () => {
+export const Route = createFileRoute("/not-found")({
+  component: NotFound,
+});
+
+function NotFound() {
   return (
     <div className="bg-white dark:bg-slate-800 flex items-center justify-center h-screen">
       <div className="grid gap-y-8 max-w-[400px]">
@@ -24,6 +29,4 @@ const NotFound = () => {
       </div>
     </div>
   );
-};
-
-export default NotFound;
+}
