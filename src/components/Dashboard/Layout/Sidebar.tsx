@@ -15,7 +15,10 @@ const Sidebar: React.FC<SidebarProps> = ({ showSidebar }) => {
       className={`bg-white fixed top-0 bottom-0 ${sidebarPosition} w-[250px] py-10 border border-zinc-200 shadow-md col-span-1 z-20 transition-all lg:rounded-md lg:w-full lg:h-fit lg:top-24 lg:grid lg:sticky lg:p-0`}
     >
       <div className="py-2 px-3 border-b">
-        <Link to="" className="text-base text-slate-900 hover:text-blue-600">
+        <Link
+          to="/dashboard"
+          className="text-base text-slate-900 hover:text-blue-600"
+        >
           Dashboard
         </Link>
       </div>

@@ -1,15 +1,11 @@
+import { useState } from "react";
+import Breadcrumb from "./Breadcrumb";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-import Breadcrumb from "./Breadcrumb";
-import { useEffect, useState } from "react";
 
 const DashboardLayout = ({ children }: { children: JSX.Element }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const toggleSidebar = () => setShowSidebar((prevState) => !prevState);
-
-  useEffect(() => {
-    console.log(showSidebar);
-  }, [showSidebar]);
 
   return (
     <>

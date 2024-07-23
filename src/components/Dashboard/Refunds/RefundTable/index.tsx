@@ -1,5 +1,5 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+
 import {
   Table,
   TableBody,
@@ -9,78 +9,72 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Badge } from "@/components/ui/badge";
-import { FileDown, Filter } from "lucide-react";
-import { transactions } from "@/lib/constants";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { dummyTransactions } from "@/lib/constants";
 import { TransactionType } from "@/types";
+import { FilterExport } from "./FilterExport";
+import { useState } from "react";
+import { MyTabsList } from "./MyTabsList";
 
-const TransactionTable = () => {
+interface IDProp {
+  handleRefundClick: (transactionId: string | number) => void;
+  selectedRefundId: string | number;
+}
+
+const RefundTable: React.FC<IDProp> = ({
+  handleRefundClick,
+  selectedRefundId,
+}) => {
+  const [status, setStatus] = useState<string>("all");
+  const [amount, setAmount] = useState<string>("");
+  const [date, setDate] = useState<Date | undefined>();
+
+  const resetAll = () => {
+    setStatus("all");
+    setAmount("");
+    setDate(undefined);
+  };
+
   return (
     <div className="grid gap-y-6">
-      {/* Tabs */}
+      {/*====== Tabs ======*/}
       <Tabs defaultValue="week" className="grid gap-y-4 w-full">
         {/* Table controls */}
         <div className="flex flex-col gap-2 items-end justify-between md:flex-row md:items-center">
-          <TabsList className="grid w-full md:w-fit grid-cols-3">
-            <TabsTrigger value="week">Week</TabsTrigger>
-            <TabsTrigger value="month">Month</TabsTrigger>
-            <TabsTrigger value="year">Year</TabsTrigger>
-          </TabsList>
+          {/* Tablist */}
+          <MyTabsList />
 
           {/* Filter & Export */}
-          <div className="flex items-center gap-x-1 justify-end">
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="rounded-lg cursor-pointer py-1 px-3"
-                  asChild
-                >
-                  <span>
-                    <Filter className="w-4 h-4 mr-1" />
-                    <span className="text-xs">Filter</span>
-                  </span>
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent>
-                Place content for the popover here.
-              </PopoverContent>
-            </Popover>
-            <Button
-              variant="outline"
-              className="rounded-lg cursor-pointer py-1 px-3"
-              asChild
-            >
-              <span>
-                <FileDown className="w-4 h-4 mr-1" />
-                <span className="text-xs">Export</span>
-              </span>
-            </Button>
-          </div>
+          <FilterExport
+            status={status}
+            amount={amount}
+            date={date}
+            setStatus={setStatus}
+            setAmount={setAmount}
+            setDate={setDate}
+            resetAll={resetAll}
+          />
         </div>
 
-        {/* Tables */}
+        {/*====== Tables ======*/}
+        {/* Weekly */}
         <TabsContent value="week">
           <div className="grid gap-y-4 border border-zinc-200 rounded-md shadow-md p-4">
             <div className="grid gap-y-1">
-              <h2 className="text-2xl text-slate-900">
-                This Week's Transactions
-              </h2>
+              <h2 className="text-2xl text-slate-900">Refunds</h2>
               <p className="text-muted-foreground text-sm">
-                Recent transactions from your store
+                Recent refunds from your store
               </p>
             </div>
 
             {/*  */}
             <Table>
-              <TableCaption>A list of your weekly transactions.</TableCaption>
+              <TableCaption>A list of your weekly refunds.</TableCaption>
               <TableHeader>
                 <TableRow>
+                  <TableHead>
+                    <strong>#</strong> ID
+                  </TableHead>
                   <TableHead>Customer</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead>Date</TableHead>
@@ -88,24 +82,29 @@ const TransactionTable = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {transactions.length ? (
-                  transactions.map((transaction: TransactionType) => (
-                    <TableRow key={transaction.id}>
+                {dummyTransactions.length ? (
+                  dummyTransactions.map((transaction: TransactionType) => (
+                    <TableRow
+                      key={transaction.id}
+                      onClick={() => handleRefundClick(transaction.id)}
+                      className={`cursor-pointer ${selectedRefundId === transaction.id && "bg-zinc-200"}`}
+                    >
+                      <TableCell>{transaction.id}</TableCell>
                       <TableCell className="grid">
                         <span className="text-base">
-                          {transaction.customer_name}
+                          {transaction.customer.name}
                         </span>
                         <span className="text-muted-foreground">
-                          {transaction.email}
+                          {transaction.customer.email}
                         </span>
                       </TableCell>
                       <TableCell>
-                        {transaction.status === "Declined" ? (
+                        {transaction.status === "declined" ? (
                           <Badge variant="destructive">
                             {transaction.status}
                           </Badge>
-                        ) : transaction.status === "Pending" ? (
-                          <Badge className="bg-amber-400">
+                        ) : transaction.status === "pending" ? (
+                          <Badge className="bg-amber-400 uppercase">
                             {transaction.status}
                           </Badge>
                         ) : (
@@ -114,7 +113,7 @@ const TransactionTable = () => {
                           </Badge>
                         )}
                       </TableCell>
-                      <TableCell>{transaction.date}</TableCell>
+                      <TableCell>{transaction.date.toLocaleString()}</TableCell>
                       <TableCell>${transaction.amount}</TableCell>
                     </TableRow>
                   ))
@@ -129,6 +128,8 @@ const TransactionTable = () => {
             </Table>
           </div>
         </TabsContent>
+
+        {/* Monthly */}
         <TabsContent value="month">
           <div className="grid gap-y-4 border border-zinc-200 rounded-md shadow-md p-4">
             <div className="grid gap-y-1">
@@ -141,6 +142,7 @@ const TransactionTable = () => {
             </div>
           </div>
         </TabsContent>
+        {/* Yearly */}
         <TabsContent value="year">
           <div className="grid gap-y-4 border border-zinc-200 rounded-md shadow-md p-4">
             <div className="grid gap-y-1">
@@ -158,4 +160,4 @@ const TransactionTable = () => {
   );
 };
 
-export default TransactionTable;
+export default RefundTable;

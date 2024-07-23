@@ -6,14 +6,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getTransactionById } from "@/lib/dummy-api";
-import { TransactionType } from "@/types";
+import { RefundType } from "@/types";
 import { useQuery } from "@tanstack/react-query";
-import { format } from "date-fns";
 import { CreditCard, EllipsisVertical, FileDown, Trash } from "lucide-react";
 import React from "react";
 
 interface IDProp {
-  selectedTransactionId: string | number;
+  selectedRefundId: string | number;
 }
 
 // ====== DropdownMenu ======
@@ -35,10 +34,10 @@ const MyDropdown = () => (
   </DropdownMenu>
 );
 
-const TransactionDetails: React.FC<IDProp> = ({ selectedTransactionId }) => {
-  const { isLoading, error, data } = useQuery<TransactionType | null, Error>({
-    queryKey: ["transactionDetails", selectedTransactionId],
-    queryFn: async () => getTransactionById(selectedTransactionId),
+const RefundDetails: React.FC<IDProp> = ({ selectedRefundId }) => {
+  const { isLoading, error, data } = useQuery<RefundType | null, Error>({
+    queryKey: ["transactionDetails", selectedRefundId],
+    queryFn: async () => getTransactionById(selectedRefundId),
   });
 
   if (isLoading)
@@ -101,4 +100,4 @@ const TransactionDetails: React.FC<IDProp> = ({ selectedTransactionId }) => {
   );
 };
 
-export default TransactionDetails;
+export default RefundDetails;

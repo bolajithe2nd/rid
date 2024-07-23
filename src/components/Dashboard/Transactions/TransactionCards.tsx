@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 
 const TransactionCards = () => {
   return (
-    <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr_auto_auto]">
+    <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-[20rem_auto_auto]">
       {/* Item 1 */}
       <Card className="border border-zinc-200 rounded-md shadow-md h-fit">
         <CardHeader>

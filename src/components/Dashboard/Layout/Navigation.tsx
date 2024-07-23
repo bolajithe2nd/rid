@@ -30,29 +30,29 @@ const Navigation = () => {
       sublinks: [
         {
           name: "Transactions",
-          path: "payments/transactions",
+          path: "/dashboard/payments/transactions",
           icon: <DollarSign className="w-5 h-5" />,
         },
         {
           name: "Refunds",
-          path: "payments/refunds",
+          path: "/dashboard/payments/refunds",
           icon: <RotateCcw className="w-5 h-5" />,
         },
       ],
     },
     {
       name: "Checkout",
-      path: "checkout",
+      path: "/dashboard/checkout",
       icon: <Tag className="w-5 h-5" />,
     },
     {
       name: "Reports",
-      path: "reports",
+      path: "/dashboard/reports",
       icon: <FileText className="w-5 h-5" />,
     },
     {
       name: "Settings",
-      path: "settings",
+      path: "/dashboard/settings",
       icon: <Settings className="w-5 h-5" />,
     },
   ];
@@ -77,7 +77,7 @@ const Navigation = () => {
                     <Link
                       key={sublink.name}
                       to={`${sublink.path}`}
-                      className="flex items-center gap-x-4 py-2 px-4 text-slate-900 hover:text-blue-600 rid-link"
+                      className="flex items-center gap-x-4 py-2 px-4 text-slate-900 hover:text-blue-600 rid-link [&.active]:text-blue-600"
                     >
                       {sublink.icon}
                       <span>{sublink.name}</span>
@@ -89,7 +89,7 @@ const Navigation = () => {
           ) : (
             <Link
               to={`${link.path}`}
-              className="flex items-center gap-x-2 py-2 px-3 text-slate-900 hover:text-blue-600"
+              className="flex items-center gap-x-2 py-2 px-3 text-slate-900 hover:text-blue-600 [&.active]:text-blue-600"
             >
               {link.icon}
               <span>{link.name}</span>
